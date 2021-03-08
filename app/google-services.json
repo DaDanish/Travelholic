@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "66804513790",
+    "project_id": "travelholic-6d6bf",
+    "storage_bucket": "travelholic-6d6bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66804513790:android:ae6e4734aa60160a019eaf",
+        "android_client_info": {
+          "package_name": "com.example.travelholic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66804513790-k7t5neesgi1d4s6b9u1squgcmjiba7mm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd1QuIQO_U_fvJHEEDajgNDPjJFyAzcDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66804513790-k7t5neesgi1d4s6b9u1squgcmjiba7mm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
