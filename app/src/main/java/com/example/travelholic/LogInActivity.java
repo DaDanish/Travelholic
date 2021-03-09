@@ -45,21 +45,32 @@ public class LogInActivity extends AppCompatActivity {
         activityLogInBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signInWithEmailAndPassword(activityLogInBinding.etLoginEmail.getText().toString().trim(),activityLogInBinding.etLoginPassword.getText().toString().trim())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful())
-                                {
-                                    Intent intent = new Intent(LogInActivity.this,MainActivity.class);
-                                    startActivity(intent);
-                                    finishAffinity();
+                if (!validateLoginEmail() | !validateLoginPassword())
+                {
+                    Toast.makeText(LogInActivity.this, "Please clear errors", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    firebaseAuth.signInWithEmailAndPassword(activityLogInBinding.etLoginEmail.getText().toString().trim(),activityLogInBinding.etLoginPassword.getText().toString().trim())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful())
+                                    {
+                                        progressDialog.show();
+                                        Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+                                        startActivity(intent);
+                                        finishAffinity();
+                                        progressDialog.dismiss();
+                                    }
+                                    else {
+                                        Toast.makeText(LogInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else {
-                                    Toast.makeText(LogInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                            });
+                }
+
+
+
             }
         });
 
@@ -77,4 +88,54 @@ public class LogInActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+    private boolean validateLoginEmail() {
+        String usernameInput = activityLogInBinding.etLoginEmail.getText().toString().trim();
+        if (usernameInput.isEmpty()) {
+            activityLogInBinding.etLoginEmail.setError("Field can't be empty");
+            return false;
+        } else {
+            activityLogInBinding.etLoginEmail.setError(null);
+            return true;
+        }
+    }
+
+
+
+
+
+    private boolean validateLoginPassword() {
+        String emailInput = activityLogInBinding.etLoginPassword.getText().toString().trim();
+        if (emailInput.isEmpty()) {
+            activityLogInBinding.textInputLoginPassword.setError("Field can't be empty");
+            return false;
+        } else {
+            activityLogInBinding.textInputLoginPassword.setError(null);
+            return true;
+        }
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

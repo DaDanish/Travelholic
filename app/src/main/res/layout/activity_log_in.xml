@@ -63,7 +63,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        android:id="@+id/textInputLoginPassword">
 
         <EditText
             android:id="@+id/etLoginPassword"
