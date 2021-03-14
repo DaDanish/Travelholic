@@ -164,7 +164,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/ivSignUpGoogle"
+            android:id="@+id/ivLoginGoogle"
             android:layout_width="30dp"
             android:layout_height="60dp"
             android:layout_weight="1"
