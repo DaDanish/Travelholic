@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.travelholic.databinding.ActivityMainBinding;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.itemLogout:
                 firebaseAuth.signOut();
+                LoginManager.getInstance().logOut();        //this will not remember the previous logged in user
                 Intent intent = new Intent(MainActivity.this,LogInActivity.class);
                 startActivity(intent);
                 finishAffinity();

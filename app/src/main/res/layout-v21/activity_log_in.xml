@@ -28,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="29dp"
         android:orientation="horizontal">
 
         <TextView
@@ -93,7 +93,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="10dp"
         android:text="login"
         android:textStyle="bold"
         app:backgroundTint="@color/light_green" />
@@ -128,36 +128,38 @@
             android:background="?android:attr/listDivider" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView4"
+
+    <Button
+        android:id="@+id/btnLoginGoogle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:gravity="center_horizontal"
-        android:text="Connect with " />
+        android:background="@drawable/custom_button_google"
+        android:drawableLeft="@drawable/ic_google"
+        android:elevation="20dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="Sign in Google"
+        android:textAllCaps="false"
+        android:textColor="#8E8787"
+        android:textSize="15sp"
+        app:backgroundTint="#F6F0F0" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btnLoginFacebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:orientation="horizontal">
+        android:background="@drawable/custom_button_google"
+        android:drawableLeft="@drawable/ic_facebook"
+        android:elevation="20dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="Sign in Facebook"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:backgroundTint="#3b5998" />
 
-        <ImageView
-            android:id="@+id/ivLoginGoogle"
-            android:layout_width="30dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/google" />
 
-        <ImageView
-            android:id="@+id/ivLoginFacebook"
-            android:layout_width="30dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_facebook" />
-    </LinearLayout>
 
 </LinearLayout>
