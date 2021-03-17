@@ -63,7 +63,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
         //Facebook Login
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        //FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
 
@@ -195,7 +195,7 @@ public class LogInActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    Toast.makeText(LogInActivity.this, "Login Falied With Facebook", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LogInActivity.this, "Login Falied With Facebook " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

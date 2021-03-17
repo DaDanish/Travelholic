@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Travelholic</string>
 
+<!--    Facebook-->
     <string name="facebook_app_id">124325896298284</string>
     <string name="fb_login_protocol_scheme">fb124325896298284</string>
+
 </resources>
