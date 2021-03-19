@@ -1,4 +1,4 @@
-package com.example.travelholic;
+package com.example.travelholic.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,14 +15,11 @@ import com.example.travelholic.Fragments.AlbumFragment;
 import com.example.travelholic.Fragments.HomeFragment;
 import com.example.travelholic.Fragments.MapFragment;
 import com.example.travelholic.Fragments.ProfileFragment;
+import com.example.travelholic.R;
 import com.example.travelholic.databinding.ActivityMainBinding;
 import com.facebook.login.LoginManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Objects;
-
-import static java.util.Objects.*;
 
 public class MainActivity extends AppCompatActivity {
 

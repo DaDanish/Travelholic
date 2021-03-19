@@ -1,11 +1,11 @@
-package com.example.travelholic;
+package com.example.travelholic.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,9 +21,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     ActivitySignUpBinding activitySignUpBinding;
 
-    private FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     ProgressDialog progressDialog;
+
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +33,17 @@ public class SignUpActivity extends AppCompatActivity {
         activitySignUpBinding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(activitySignUpBinding.getRoot());
 
+        handler = new Handler();
+
         getSupportActionBar().hide();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Creating account");
         progressDialog.setMessage("Please wait we are creating your account");
+
+
+
 
         activitySignUpBinding.btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,36 +54,44 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "Clear the Errors", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
-
                     firebaseAuth.createUserWithEmailAndPassword(activitySignUpBinding.etSignUpEmail.getText().toString(),
                             activitySignUpBinding.etSignUpPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
                             if (task.isSuccessful())
-                            {   progressDialog.show();
-                                String fName = activitySignUpBinding.etSignUpFirstName.getText().toString().substring(0,1).toUpperCase() +
-                                        activitySignUpBinding.etSignUpFirstName.getText().toString().substring(1).toLowerCase();
-                                String lName = activitySignUpBinding.etSignUpLastName.getText().toString().substring(0,1).toUpperCase() +
-                                        activitySignUpBinding.etSignUpLastName.getText().toString().substring(1).toLowerCase();
+                            {
 
-                                Users user = new Users(fName,lName, activitySignUpBinding.etSignUpEmail.getText().toString().trim(),
-                                        activitySignUpBinding.etSignUpPassword.getText().toString().trim());
-
-                                firebaseDatabase.getReference().child("Users").child(firebaseAuth.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful())
+                                        if(task.isSuccessful())
                                         {
-                                            progressDialog.dismiss();
-                                            Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
-                                            startActivity(intent);
-                                            finishAffinity();
+                                            Toast.makeText(SignUpActivity.this, "Verification email has been sent. Please Verify your email!", Toast.LENGTH_SHORT).show();
+                                            String fName = activitySignUpBinding.etSignUpFirstName.getText().toString().substring(0,1).toUpperCase() +
+                                                    activitySignUpBinding.etSignUpFirstName.getText().toString().substring(1).toLowerCase();
+                                            String lName = activitySignUpBinding.etSignUpLastName.getText().toString().substring(0,1).toUpperCase() +
+                                                    activitySignUpBinding.etSignUpLastName.getText().toString().substring(1).toLowerCase();
+
+                                            Users user = new Users(fName,lName, activitySignUpBinding.etSignUpEmail.getText().toString().trim(),
+                                                    activitySignUpBinding.etSignUpPassword.getText().toString().trim());
+
+                                            firebaseDatabase.getReference().child("Users").child(firebaseAuth.getUid()).setValue(user);
+                                            activitySignUpBinding.etSignUpFirstName.setText("");
+                                            activitySignUpBinding.etSignUpLastName.setText("");
+                                            activitySignUpBinding.etSignUpEmail.setText("");
+                                            activitySignUpBinding.etSignUpPassword.setText("");
+
                                         }
+                                        else{
+                                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+
+
                                     }
                                 });
-                                Toast.makeText(SignUpActivity.this, "User created successful", Toast.LENGTH_SHORT).show();
+
+
+
                             }
                             else{
                                 Toast.makeText(SignUpActivity.this, task.getException().getMessage() , Toast.LENGTH_SHORT).show();
@@ -100,6 +115,10 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 
 
 

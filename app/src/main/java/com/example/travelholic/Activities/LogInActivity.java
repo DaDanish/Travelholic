@@ -1,4 +1,4 @@
-package com.example.travelholic;
+package com.example.travelholic.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,20 +8,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.travelholic.Modal.Users;
+import com.example.travelholic.R;
 import com.example.travelholic.databinding.ActivityLogInBinding;
-import com.example.travelholic.databinding.ActivitySignUpBinding;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,7 +27,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,11 +110,18 @@ public class LogInActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful())
                                     {
-                                        progressDialog.show();
-                                        Intent intent = new Intent(LogInActivity.this,MainActivity.class);
-                                        startActivity(intent);
-                                        finishAffinity();
-                                        progressDialog.dismiss();
+                                        if (firebaseAuth.getCurrentUser().isEmailVerified())
+                                        {
+                                            progressDialog.show();
+                                            Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+                                            startActivity(intent);
+                                            finishAffinity();
+                                            progressDialog.dismiss();
+
+                                        }
+                                        else {
+                                            Toast.makeText(LogInActivity.this, "this email is not verified", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                     else {
                                         Toast.makeText(LogInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
