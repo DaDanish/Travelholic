@@ -7,8 +7,19 @@ public class Users {
     String email;
     String password;
     String profileImage;
+    UsersInfo usersInfo;
 
     public Users() {
+    }
+
+    public Users(String userID, String firstName, String lastName, String email, String password, String profileImage, UsersInfo usersInfo) {
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.profileImage = profileImage;
+        this.usersInfo = usersInfo;
     }
 
     public Users(String userID, String firstName, String lastName, String email, String password, String profileImage) {
